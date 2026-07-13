@@ -1042,15 +1042,21 @@ class App(QMainWindow):
 
     def _check_updates(self):
         """Checkt voor updates en toont dialoog indien beschikbaar"""
+        self._log("Controleren op updates...", "info")
         self.update_btn.setEnabled(False)
+        self.update_btn.setText("...")
         update_info = check_for_updates()
         self.update_btn.setEnabled(True)
+        self.update_btn.setText("↻")
 
         if update_info.get("available"):
+            self._log(f"Nieuwe versie beschikbaar: v{update_info['version']}", "ok")
             dlg = UpdateDialog(update_info, self)
             dlg.exec()
         elif update_info.get("error"):
             self._log(f"Update check mislukt: {update_info['error']}", "warn")
+        else:
+            self._log("Geen nieuwe versie beschikbaar", "info")
 
 # --- Entry point --------------------------------------------------------------
 if __name__ == "__main__":
