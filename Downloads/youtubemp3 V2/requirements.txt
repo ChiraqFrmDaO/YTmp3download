@@ -1,0 +1,4 @@
+PyQt6>=6.6.0
+yt-dlp>=2024.1.0
+packaging>=23.0
+pyinstaller>=6.3.0
